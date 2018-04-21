@@ -1,0 +1,14 @@
+<resources>
+    <dimen name="app_bar_height">72dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="button_leftRight_padding">8dp</dimen>
+
+    <dimen name="tableRowBorderMargin">10dp</dimen>
+    <dimen name="tableRowBetweenMargin">2dp</dimen>
+    <dimen name="tableRowStrokeWidth">2dp</dimen>
+    <dimen name="tableStrokeWidth">5dp</dimen>
+    <dimen name="tableCornerRadius">12dp</dimen>
+
+    <dimen name="topRowCornerRadius">12dp</dimen>
+</resources>

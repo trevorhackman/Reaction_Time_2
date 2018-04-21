@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/LightBlue700</color>
+    <color name="colorPrimaryDark">@color/LightBlue900</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--<color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>-->
+
+    <color name="status_bar_hold">@color/Red900</color>
+    <color name="status_bar_released_early">@color/Orange900</color>
+    <color name="status_bar_release">#007700</color>
+
+    <color name="background">@color/LightBlue500</color>
+    <color name="background_hold">@color/Red500</color>
+    <color name="background_released_early">@color/Orange600</color>
+    <color name="background_release">#00BB00</color>
+
+    <color name="table_row">@color/background</color>
+    <color name="table_row_red">@color/background_hold</color>
+    <color name="table_row_orange">@color/background_released_early</color>
+    <color name="table_row_green">@color/background_release</color>
+    <color name="table_row_stroke">@color/RedAccent200</color>
+
+    <color name="table_background">@color/BlueGrey900</color>
+    <color name="table_border">@color/Indigo700</color>
+
+    <color name="head_color">@color/White</color>
+    <color name="text_color">#ffFFFFFF</color>
+
+    <color name="try_again_button">@color/PinkAccent400</color>
+    <color name="try_again_button_ripple">@color/Indigo700</color>
+    <color name="try_again_button_stroke">@color/BlueGrey700</color>
+
+</resources>

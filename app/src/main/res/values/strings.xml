@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Reaction Time</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="trial_1">Trial 1</string>
+    <string name="trial_2">Trial 2</string>
+    <string name="trial_3">Trial 3</string>
+    <string name="trial_4">Trial 4</string>
+    <string name="trial_5">Trial 5</string>
+    <string name="average">Average</string>
+    <string name="empty_time">---</string>
+
+    <string name="head_start">PRESS</string>
+    <string name="head_hold">HOLD</string>
+    <string name="head_to_release">RELEASE!</string>
+    <string name="head_released_early">EARLY</string>
+    <string name="head_released">PRESS AGAIN</string>
+    <string name="head_finished">FINISHED</string>
+
+    <string name="explanatory_start">Press and hold your finger to the screen. Release your finger when the screen turns green.</string>
+    <string name="explanatory_hold">Wait until the screen turns green to release.</string>
+    <string name="explanatory_released_early">You released early! Trials have been reset. Press and hold your finger to the screen to try again.</string>
+    <string name="explanatory_to_release">Release now!</string>
+    <string name="explanatory_released1">You took</string>
+    <string name="explanatory_released2">milliseconds to react. Press and hold your finger to the screen for the next trial.</string>
+    <string name="explanatory_finished">You have finished all trials. Your average reaction time has been measured at</string>
+
+    <string name="try_again">Try Again</string>
+</resources>

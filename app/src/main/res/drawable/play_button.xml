@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="100dp"
+    android:width="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100" >
+
+    <!-- Shadow -->
+    <group
+        android:translateX="3"
+        android:translateY="0">
+        <path android:fillColor="#000000"
+            android:fillAlpha="0.2"
+            android:pathData="M 98 50 L 23 93.3 L 23 6.7 z" />
+    </group>
+
+    <!-- Glow/Border -->
+    <group
+        android:scaleY="1.1"
+        android:scaleX="1.1"
+        android:translateX="-5"
+        android:translateY="-5">
+        <path android:fillColor="#000000"
+            android:fillAlpha="0.2"
+            android:pathData="M 98 50 L 23 93.3 L 23 6.7 z" />
+    </group>
+
+    <!-- draw a path -->
+    <!-- Previous green color - #04B431-->
+    <path android:fillColor="#FFFFFF" android:strokeColor="@color/DeepOrange300" android:strokeWidth="5"
+        android:pathData="M 87.5 50 L 12.5 93.3 L 12.5 6.7 z" />
+
+    <!-- Circle -->
+</vector>

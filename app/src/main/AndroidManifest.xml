@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hackman.trevor.reactiontimetest">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Change allowBackup to true, if needed in the future -->
+    <application
+        android:resizeableActivity="false"
+        android:supportsPictureInPicture="false"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <meta-data android:name="android.max_aspect" android:value="3" /> <!-- This is critical b/c default is 16/9, app does not stretch to fill screens of phones wider than this -->
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" /> <!-- disable crashlytics by default so that I can conditionally enable it onCreate -->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="7c414c329f4e2ac275ac7a0c78f70f79025b5206" />
+    </application>
+</manifest>

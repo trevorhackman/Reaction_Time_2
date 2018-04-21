@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hackman.trevor.reactiontimetest.RootLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context="hackman.trevor.reactiontimetest.MainActivity">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="hackman.trevor.reactiontimetest.MainActivity">
+
+        <LinearLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1" />
+
+            <include
+                layout="@layout/head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:layout_weight="0" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/explanatoryText"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:text="@string/explanatory_start"
+                android:textAlignment="center"
+                android:textAppearance="@style/Text" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_weight="0"
+            android:background="@drawable/table_background"
+            android:stretchColumns="0,1">
+
+            <hackman.trevor.reactiontimetest.TrialTableRow
+                android:id="@+id/tableRow0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/tableRowBetweenMargin"
+                android:layout_marginLeft="@dimen/tableRowBorderMargin"
+                android:layout_marginRight="@dimen/tableRowBorderMargin"
+                android:layout_marginTop="@dimen/tableRowBorderMargin"
+                android:background="@drawable/top_row_background">
+
+                <TextView
+                    android:id="@+id/text_trial1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/trial_1"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+
+                <TextView
+                    android:id="@+id/text_time1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/empty_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+            </hackman.trevor.reactiontimetest.TrialTableRow>
+
+            <hackman.trevor.reactiontimetest.TrialTableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/tableRowBetweenMargin"
+                android:layout_marginLeft="@dimen/tableRowBorderMargin"
+                android:layout_marginRight="@dimen/tableRowBorderMargin"
+                android:background="@drawable/table_row_background">
+
+                <TextView
+                    android:id="@+id/text_trial2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/trial_2"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+
+                <TextView
+                    android:id="@+id/text_time2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/empty_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+            </hackman.trevor.reactiontimetest.TrialTableRow>
+
+            <hackman.trevor.reactiontimetest.TrialTableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/tableRowBetweenMargin"
+                android:layout_marginLeft="@dimen/tableRowBorderMargin"
+                android:layout_marginRight="@dimen/tableRowBorderMargin"
+                android:background="@drawable/table_row_background">
+
+                <TextView
+                    android:id="@+id/test_trial3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/trial_3"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+
+                <TextView
+                    android:id="@+id/text_time3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/empty_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+            </hackman.trevor.reactiontimetest.TrialTableRow>
+
+            <hackman.trevor.reactiontimetest.TrialTableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/tableRowBetweenMargin"
+                android:layout_marginLeft="@dimen/tableRowBorderMargin"
+                android:layout_marginRight="@dimen/tableRowBorderMargin"
+                android:background="@drawable/table_row_background">
+
+                <TextView
+                    android:id="@+id/text_trial4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/trial_4"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+
+                <TextView
+                    android:id="@+id/text_time4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/empty_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+            </hackman.trevor.reactiontimetest.TrialTableRow>
+
+            <hackman.trevor.reactiontimetest.TrialTableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/tableRowBetweenMargin"
+                android:layout_marginLeft="@dimen/tableRowBorderMargin"
+                android:layout_marginRight="@dimen/tableRowBorderMargin"
+                android:background="@drawable/table_row_background">
+
+                <TextView
+                    android:id="@+id/text_trial5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/trial_5"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+
+                <TextView
+                    android:id="@+id/text_time5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/empty_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text" />
+            </hackman.trevor.reactiontimetest.TrialTableRow>
+
+            <hackman.trevor.reactiontimetest.TrialTableRow
+                android:id="@+id/tableRowAverage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/tableRowBorderMargin"
+                android:layout_marginRight="@dimen/tableRowBorderMargin"
+                android:background="@drawable/table_row_background">
+
+                <TextView
+                    android:id="@+id/text_average"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/average"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_timeAverage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/empty_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Text"
+                    android:textStyle="bold" />
+
+            </hackman.trevor.reactiontimetest.TrialTableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</hackman.trevor.reactiontimetest.RootLayout>
