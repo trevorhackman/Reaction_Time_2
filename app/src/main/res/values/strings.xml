@@ -19,11 +19,12 @@
 
     <string name="explanatory_start">Press and hold your finger to the screen. Release your finger when the screen turns green.</string>
     <string name="explanatory_hold">Wait until the screen turns green to release.</string>
-    <string name="explanatory_released_early">You released early! Trials have been reset. Press and hold your finger to the screen to try again.</string>
+    <string name="explanatory_released_early">You released early! Trials and times have been reset.</string>
     <string name="explanatory_to_release">Release now!</string>
     <string name="explanatory_released1">You took</string>
     <string name="explanatory_released2">milliseconds to react. Press and hold your finger to the screen for the next trial.</string>
-    <string name="explanatory_finished">You have finished all trials. Your average reaction time has been measured at</string>
+    <string name="explanatory_finished1">You have finished all five trials. Your average reaction time has been measured at</string>
+    <string name="explanatory_finished2">milliseconds</string>
 
     <string name="try_again">Try Again</string>
 </resources>

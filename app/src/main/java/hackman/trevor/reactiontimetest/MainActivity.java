@@ -8,6 +8,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
@@ -28,9 +31,6 @@ import static hackman.trevor.tlibrary.library.TLogging.flog;
 import static hackman.trevor.tlibrary.library.TLogging.report;
 
 public class MainActivity extends AppCompatActivity {
-    // TODO Make this false for release, keep true for testing
-    private final static boolean TESTING = false; // Disables ads and crash reporting
-
     private RelativeLayout rootLayout;
     private LinearLayout topLayout;
     private Button tryAgainButton;
@@ -65,13 +65,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Crashlytics disabled be default, automatically enable it here if not testing
-        if (!TESTING) {
-            Fabric.with(this, new Crashlytics());
-        }
-        else {
-            TLogging.disableCrashlytics(); // Necessary else crashlytics crashes from not being initialized with fabric
-        }
+        if (!TLogging.TESTING) Fabric.with(this, new Crashlytics());
+        else TLogging.disableCrashlytics(); // Necessary else crashlytics crashes from not being initialized with fabric
 
         flog("OnCreate()");
         setContentView(R.layout.activity_main);
@@ -122,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
         startEffect();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (!isFinishing()) {
+            finish();
+        }
+    }
+
     void startEffect() {
         rootLayout.setBackgroundColor(resources.getColor(R.color.background));
         headText.setText(R.string.head_start);
@@ -154,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
             trialTime.setText(R.string.empty_time);
         }
         averageText.setText(R.string.empty_time);
+        addTryAgainButton();
     }
 
     void toReleaseEffect() {
@@ -162,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
         explanatoryText.setText(R.string.explanatory_to_release);
         window.setStatusBarColor(releaseStatusBarColor);
         setAllRows(TrialTableRow.ColorPalette.green);
+
+        System.out.println(System.currentTimeMillis());
     }
 
     void releasedEffect() {
@@ -177,11 +186,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void finishedEffect() {
-        rootLayout.setBackgroundColor(resources.getColor(R.color.background));
+        int backgroundColor = resources.getColor(R.color.background);
+        rootLayout.setBackgroundColor(backgroundColor);
         String hText = getString(R.string.head_finished);
         headText.setText(hText);
-        String expText = getString(R.string.explanatory_finished) + " " + game.getAverage() + " milliseconds.";
-        explanatoryText.setText(expText);
+
+        String staticString = getString(R.string.explanatory_finished1);
+        int INT_START = staticString.length() + 1;
+
+        String dynamicString = game.getAverage() + " " + getString(R.string.explanatory_finished2);
+
+        String fullString = staticString + "\n" + dynamicString;
+        int INT_END = fullString.length();
+
+        SpannableStringBuilder partStylizedString = new SpannableStringBuilder(fullString);
+        partStylizedString.setSpan(new RelativeSizeSpan(1.2f), INT_START, INT_END, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        explanatoryText.setText(partStylizedString);
+
         window.setStatusBarColor(startStatusBarColor);
         setAllRows(TrialTableRow.ColorPalette.blue);
 
@@ -227,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
     class TryAgainButton extends android.support.v7.widget.AppCompatButton {
         private ObjectAnimator fadeOutAnimator;
+        private boolean enabled = true;
 
         public TryAgainButton(Context context) {
             super(context);
@@ -261,7 +284,10 @@ public class MainActivity extends AppCompatActivity {
             this.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    removeButton();
+                    if (enabled) {
+                        enabled = false;
+                        removeButton();
+                    }
                 }
             });
 
@@ -273,20 +299,21 @@ public class MainActivity extends AppCompatActivity {
 
             // Create fade out animation
             fadeOutAnimator = ObjectAnimator.ofFloat(this, "alpha", 0);
-            fadeOutAnimator.setDuration(500);
+            fadeOutAnimator.setDuration(450);
 
             fadeOutAnimator.addListener(new Animator.AnimatorListener() {
-                @Override public void onAnimationStart(Animator animation) {}
                 @Override public void onAnimationRepeat(Animator animation) {}
-                @Override public void onAnimationCancel(Animator animation) { }
+                @Override public void onAnimationCancel(Animator animation) {}
+                @Override public void onAnimationStart(Animator animation) { }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    game.again();
                     topLayout.removeView(tryAgainButton);
                     topLayout.removeView(tryAgainButtonSpace);
-                    game.again();
                     startEffect();
                     tryAgainButton.setAlpha(1.0f);
+                    enabled = true;
                 }
             });
         }

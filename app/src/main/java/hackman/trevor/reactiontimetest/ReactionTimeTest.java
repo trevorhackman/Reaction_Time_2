@@ -1,9 +1,11 @@
 package hackman.trevor.reactiontimetest;
 
 import android.os.Handler;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.Random;
 
+import static hackman.trevor.reactiontimetest.ReactionTimeTest.State.Finished;
 import static hackman.trevor.reactiontimetest.ReactionTimeTest.State.To_Press;
 import static hackman.trevor.reactiontimetest.ReactionTimeTest.State.To_Release;
 import static hackman.trevor.tlibrary.library.TLogging.report;
@@ -16,10 +18,10 @@ import static hackman.trevor.tlibrary.library.TLogging.report;
 public class ReactionTimeTest {
     // Internal state
     enum  State {
-        To_Press,
-        Hold,
-        To_Release,
-        Finished
+        To_Press,   // Blue
+        Hold,       // Red
+        To_Release, // Green
+        Finished    // All trials finished OR released early
     }
 
     private Random random;
@@ -74,7 +76,7 @@ public class ReactionTimeTest {
         for (int i = 0; i < trial; i++) {
             sum += trial_times[i];
         }
-        return sum / (trial);
+        return Math.round(sum / (double)trial);
     }
 
     public synchronized void press() {
@@ -95,27 +97,35 @@ public class ReactionTimeTest {
     }
 
     public synchronized void release() {
+        // To make measurement ever so tiny tiny bit less delayed
+        long score = System.currentTimeMillis() - oldTime;
+
+        // Proper release
+        if (state == To_Release) {
+            putScore(score);
+        }
         // Early release
-        if (state == State.Hold) {
+        else if (state == State.Hold) {
             handler.removeCallbacksAndMessages(null); // Removes all scheduled tasks
             trial = 0;
             trial_times = new long[NUM_TRIALS];
-            state = To_Press;
+            state = Finished;
             Visual.ReleasedEarly.affect(main);
         }
-        // Proper release
-        else if (state == To_Release) {
-            trial_times[trial++] = System.currentTimeMillis() - oldTime;
-            if (trial < NUM_TRIALS) {
-                state = To_Press;
-                Visual.Released.affect(main);
-            }
-            else if (trial == NUM_TRIALS) {
-                state = State.Finished;
-                Visual.Finished.affect(main);
-            }
-            else { throw new RuntimeException("Wtf: Invalid trial from To_Release");}
+    }
+
+    @VisibleForTesting
+    void putScore(long score) {
+        trial_times[trial++] = score;
+        if (trial < NUM_TRIALS) {
+            state = To_Press;
+            Visual.Released.affect(main);
         }
+        else if (trial == NUM_TRIALS) {
+            state = State.Finished;
+            Visual.Finished.affect(main);
+        }
+        else { throw new RuntimeException("Wtf: Invalid trial from To_Release");}
     }
 
     public synchronized void again() {
@@ -180,9 +190,5 @@ public class ReactionTimeTest {
             }
         };
         abstract void affect(MainActivity main);
-    }
-
-    private void save() {
-
     }
 }

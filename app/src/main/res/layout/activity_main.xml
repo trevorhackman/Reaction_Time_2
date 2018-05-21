@@ -15,24 +15,23 @@
         android:orientation="vertical"
         tools:context="hackman.trevor.reactiontimetest.MainActivity">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".04" />
+
+        <include
+            layout="@layout/head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp" />
+
         <LinearLayout
             android:id="@+id/topLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".1" />
-
-            <include
-                layout="@layout/head"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
-                android:layout_weight="0" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -42,10 +41,9 @@
             <TextView
                 android:id="@+id/explanatoryText"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_weight="1"
                 android:text="@string/explanatory_start"
                 android:textAlignment="center"
                 android:textAppearance="@style/Text" />
@@ -221,6 +219,7 @@
                     android:text="@string/average"
                     android:textAlignment="center"
                     android:textAppearance="@style/Text"
+                    android:textSize="24dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -231,6 +230,7 @@
                     android:text="@string/empty_time"
                     android:textAlignment="center"
                     android:textAppearance="@style/Text"
+                    android:textSize="24dp"
                     android:textStyle="bold" />
 
             </hackman.trevor.reactiontimetest.TrialTableRow>
