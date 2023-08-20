@@ -1,7 +1,6 @@
 package hackman.trevor.reactiontimetest;
 
 import android.os.Handler;
-import android.support.annotation.VisibleForTesting;
 
 import java.util.Random;
 
@@ -10,11 +9,12 @@ import static hackman.trevor.reactiontimetest.ReactionTimeTest.State.To_Press;
 import static hackman.trevor.reactiontimetest.ReactionTimeTest.State.To_Release;
 import static hackman.trevor.tlibrary.library.TLogging.report;
 
+import androidx.annotation.VisibleForTesting;
+
 /**
  * Created by Trevor on 3/17/2018.
  * Logical unit
  */
-
 public class ReactionTimeTest {
     // Internal state
     enum  State {
@@ -24,10 +24,10 @@ public class ReactionTimeTest {
         Finished    // All trials finished OR released early
     }
 
-    private Random random;
+    private final Random random;
     private State state;
-    private Handler handler;
-    private MainActivity main;
+    private final Handler handler;
+    private final MainActivity main;
 
     private final int NUM_TRIALS = 5;
     private final long MIN_RANDOM = 1000; // In milliseconds
@@ -146,7 +146,7 @@ public class ReactionTimeTest {
         while (random.nextDouble() < .925) increment++;
 
         long wait = MIN_RANDOM;
-        wait += increment * interval;
+        wait += (long) increment * interval;
         wait += random.nextInt(interval + 1);
         return wait;
     }

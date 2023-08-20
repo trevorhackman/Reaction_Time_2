@@ -2,8 +2,6 @@ package hackman.trevor.tlibrary.library;
 
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -13,6 +11,8 @@ import static android.util.Log.ERROR;
 import static android.util.Log.INFO;
 import static android.util.Log.VERBOSE;
 import static android.util.Log.WARN;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public final class TLogging {
     private TLogging() {} // Private constructor to stop instances of this class, everything is static so instances are pointless
@@ -92,11 +92,11 @@ public final class TLogging {
     }
 
     // Logs to logcat and to firebase
-    // Note: Firebase log is only recieved if there is an fatal crash or non-fatal exception
+    // Note: Firebase log is only received if there is an fatal crash or non-fatal exception
     public static void flog(String string) {
         lastLog = string;
         if (crashlyticsEnabled) {
-            Crashlytics.log(string);
+            FirebaseCrashlytics.getInstance().log(string);
         }
         else log(string);
     }
@@ -120,7 +120,7 @@ public final class TLogging {
     public static void report(Throwable e) {
         if (crashlyticsEnabled) {
             flog(e.toString());
-            Crashlytics.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
         else {
             // Method for getting stacktrace as string

@@ -2,12 +2,12 @@ package hackman.trevor.reactiontimetest;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
@@ -20,15 +20,17 @@ import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
-
 import hackman.trevor.tlibrary.library.TLogging;
 import hackman.trevor.tlibrary.library.TMath;
 import hackman.trevor.tlibrary.library.TMiscellaneous;
-import io.fabric.sdk.android.Fabric;
 
 import static hackman.trevor.tlibrary.library.TLogging.flog;
 import static hackman.trevor.tlibrary.library.TLogging.report;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class MainActivity extends AppCompatActivity {
     private RelativeLayout rootLayout;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private TrialTableRow tableRow4;
     private TrialTableRow tableRowAverage;
 
-    static Resources resources;
+    static Application application;
     ReactionTimeTest game;
 
     @Override
@@ -67,14 +69,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Crashlytics disabled be default, automatically enable it here if not testing
-        if (!TLogging.TESTING) Fabric.with(this, new Crashlytics());
+        if (!TLogging.TESTING) FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
         else TLogging.disableCrashlytics(); // Necessary else crashlytics crashes from not being initialized with fabric
 
         flog("OnCreate()");
         setContentView(R.layout.activity_main);
 
         game = new ReactionTimeTest(this);
-        resources = getResources();
+        application = getApplication();
 
         rootLayout = findViewById(R.id.rootLayout);
         topLayout = findViewById(R.id.topLayout);
@@ -95,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
         averageText = findViewById(R.id.text_timeAverage);
 
         window = getWindow();
-        startStatusBarColor = resources.getColor(R.color.colorPrimaryDark);
-        holdStatusBarColor = resources.getColor(R.color.status_bar_hold);
-        releasedEarlyStatusBarColor = resources.getColor(R.color.status_bar_released_early);
-        releaseStatusBarColor = resources.getColor(R.color.status_bar_release);
+        startStatusBarColor = getColor(R.color.colorPrimaryDark);
+        holdStatusBarColor = getColor(R.color.status_bar_hold);
+        releasedEarlyStatusBarColor = getColor(R.color.status_bar_released_early);
+        releaseStatusBarColor = getColor(R.color.status_bar_release);
 
         tableRow0 = findViewById(R.id.tableRow0);
         tableRow1 = findViewById(R.id.tableRow1);
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void startEffect() {
-        rootLayout.setBackgroundColor(resources.getColor(R.color.background));
+        rootLayout.setBackgroundColor(getColor(R.color.background));
         headText.setText(R.string.head_start);
         explanatoryText.setText(R.string.explanatory_start);
         window.setStatusBarColor(startStatusBarColor);
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void holdEffect() {
-        rootLayout.setBackgroundColor(resources.getColor(R.color.background_hold));
+        rootLayout.setBackgroundColor(getColor(R.color.background_hold));
         headText.setText(R.string.head_hold);
         explanatoryText.setText(R.string.explanatory_hold);
         window.setStatusBarColor(holdStatusBarColor);
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void releasedEarlyEffect() {
-        rootLayout.setBackgroundColor(resources.getColor(R.color.background_released_early));
+        rootLayout.setBackgroundColor(getColor(R.color.background_released_early));
         headText.setText(R.string.head_released_early);
         explanatoryText.setText(R.string.explanatory_released_early);
         window.setStatusBarColor(releasedEarlyStatusBarColor);
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void toReleaseEffect() {
-        rootLayout.setBackgroundColor(resources.getColor(R.color.background_release));
+        rootLayout.setBackgroundColor(getColor(R.color.background_release));
         headText.setText(R.string.head_to_release);
         explanatoryText.setText(R.string.explanatory_to_release);
         window.setStatusBarColor(releaseStatusBarColor);
@@ -174,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void releasedEffect() {
-        rootLayout.setBackgroundColor(resources.getColor(R.color.background));
+        rootLayout.setBackgroundColor(getColor(R.color.background));
         headText.setText(R.string.head_released);
         window.setStatusBarColor(startStatusBarColor);
         setAllRows(TrialTableRow.ColorPalette.blue);
@@ -186,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void finishedEffect() {
-        int backgroundColor = resources.getColor(R.color.background);
+        int backgroundColor = getColor(R.color.background);
         rootLayout.setBackgroundColor(backgroundColor);
         String hText = getString(R.string.head_finished);
         headText.setText(hText);
@@ -247,8 +249,8 @@ public class MainActivity extends AppCompatActivity {
         tableRowAverage.setBackground(colorPalette);
     }
 
-    class TryAgainButton extends android.support.v7.widget.AppCompatButton {
-        private ObjectAnimator fadeOutAnimator;
+    class TryAgainButton extends AppCompatButton {
+        private final ObjectAnimator fadeOutAnimator;
         private boolean enabled = true;
 
         public TryAgainButton(Context context) {
@@ -261,9 +263,9 @@ public class MainActivity extends AppCompatActivity {
             this.setTextSize(TypedValue.COMPLEX_UNIT_PX, TMath.convertDpToPixel(30, context));
 
             // Background
-            int backgroundColor = resources.getColor(R.color.try_again_button);
-            int pressedColor = resources.getColor(R.color.try_again_button_ripple);
-            int strokeColor = resources.getColor(R.color.try_again_button_stroke);
+            int backgroundColor = getColor(R.color.try_again_button);
+            int pressedColor = getColor(R.color.try_again_button_ripple);
+            int strokeColor = getColor(R.color.try_again_button_stroke);
 
             GradientDrawable background = new GradientDrawable();
             background.setColor(backgroundColor);

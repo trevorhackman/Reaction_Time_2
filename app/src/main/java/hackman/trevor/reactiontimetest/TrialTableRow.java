@@ -1,5 +1,8 @@
 package hackman.trevor.reactiontimetest;
 
+import static hackman.trevor.reactiontimetest.MainActivity.application;
+import static hackman.trevor.tlibrary.library.TLogging.report;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -9,17 +12,16 @@ import android.widget.TableRow;
 
 import hackman.trevor.tlibrary.library.TMath;
 
-import static hackman.trevor.reactiontimetest.MainActivity.resources;
-import static hackman.trevor.tlibrary.library.TLogging.report;
-
 /**
  * Created by Trevor on 3/25/2018.
- *
  */
-
 public class TrialTableRow extends TableRow {
-    enum Type {Top("Top"), Regular("Regular"), Average("Average");
-        String toString;
+    enum Type {
+        Top("Top"),
+        Regular("Regular"),
+        Average("Average");
+
+        final String toString;
 
         Type(String toString) {
             this.toString = toString;
@@ -30,20 +32,22 @@ public class TrialTableRow extends TableRow {
             return toString;
         }
     }
-    enum ColorPalette {
-        blue(resources.getColor(R.color.table_row), resources.getColor(R.color.table_row_stroke)),
-        red(resources.getColor(R.color.table_row_red), resources.getColor(R.color.table_row_red)),
-        orange(resources.getColor(R.color.table_row_orange), resources.getColor(R.color.table_row_orange)),
-        green(resources.getColor(R.color.table_row_green), resources.getColor(R.color.table_row_green));
 
-        int solidColor;
-        int borderColor;
+    enum ColorPalette {
+        blue(application.getColor(R.color.table_row), application.getColor(R.color.table_row_stroke)),
+        red(application.getColor(R.color.table_row_red), application.getColor(R.color.table_row_red)),
+        orange(application.getColor(R.color.table_row_orange), application.getColor(R.color.table_row_orange)),
+        green(application.getColor(R.color.table_row_green), application.getColor(R.color.table_row_green));
+
+        final int solidColor;
+        final int borderColor;
 
         ColorPalette(int solidColor, int borderColor) {
             this.solidColor = solidColor;
             this.borderColor = borderColor;
         }
     }
+
     Type type;
 
     public TrialTableRow(Context context, AttributeSet attributeSet) {
@@ -54,8 +58,7 @@ public class TrialTableRow extends TableRow {
     void setType(Type type) {
         if (this.type == null) {
             this.type = type;
-        }
-        else {
+        } else {
             report(getClass() + " Type already set to " + type);
         }
     }
@@ -68,7 +71,7 @@ public class TrialTableRow extends TableRow {
             Drawable[] layers = {border, solid};
             LayerDrawable layerDrawable = new LayerDrawable(layers);
 
-            int pixelInset = (int)TMath.convertDpToPixel(2, getContext());
+            int pixelInset = (int) TMath.convertDpToPixel(2, getContext());
 
             if (type == Type.Top) {
                 float x = TMath.convertWpToPixel(12, getContext());
@@ -80,9 +83,8 @@ public class TrialTableRow extends TableRow {
                 solid.setCornerRadii(cornerRadii);
                 border.setCornerRadii(cornerRadii);
 
-                layerDrawable.setLayerInset(1, pixelInset, pixelInset * 3/4, pixelInset, 0);
-            }
-            else {
+                layerDrawable.setLayerInset(1, pixelInset, pixelInset * 3 / 4, pixelInset, 0);
+            } else {
                 layerDrawable.setLayerInset(1, pixelInset, 0, pixelInset, 0);
             }
 
@@ -90,8 +92,7 @@ public class TrialTableRow extends TableRow {
             solid.setColor(colorPalette.solidColor);
 
             setBackground(layerDrawable);
-        }
-        else {
+        } else {
             report("No tableRow type found");
             // Recovery of non-fatal error
             type = Type.Regular;
