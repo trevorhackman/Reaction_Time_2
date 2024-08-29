@@ -1,9 +1,28 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
+/.idea/modules
 /.idea/libraries
-.DS_Store
+/.idea/workspace.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/deploymentTargetSelector.xml
 /build
-/captures
-.externalNativeBuild
+.gradle
+
+# Stores absolute path of SDK
+/local.properties
+
+# Stores absolute paths
+/.idea/caches
+
+# Mac OS files
+.DS_Store
+
+# Java bytecode files
+*.class
+
+# Application files
+*.apk
+*.aab
+
+# Private Keys
+AdKeys.kt
+BillingProductIds.kt
+SKUS.kt

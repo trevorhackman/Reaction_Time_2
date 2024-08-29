@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Reaction_Time.iml" filepath="$PROJECT_DIR$/.idea/modules/Reaction_Time.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Reaction_Time.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/tlibrary/Reaction_Time.tlibrary.unitTest.iml" />
+    </modules>
+  </component>
+</project>
