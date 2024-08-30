@@ -21,6 +21,7 @@
 # Application files
 *.apk
 *.aab
+/app/release
 
 # Private Keys
 AdKeys.kt
