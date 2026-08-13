@@ -29,6 +29,9 @@ import static hackman.trevor.tlibrary.library.TLogging.report;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         application = getApplication();
 
         rootLayout = findViewById(R.id.rootLayout);
+        applySystemBarInsets(rootLayout);
         topLayout = findViewById(R.id.topLayout);
         headText = findViewById(R.id.headText);
         explanatoryText = findViewById(R.id.explanatoryText);
@@ -224,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateLastTrial() {
-        String time = "" + game.getLastTrialTime() + "ms";
+        String time = game.getLastTrialTime() + "ms";
         try {
             trials[game.getTrial() - 1].setText(time);
         }
@@ -236,8 +240,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateAverage() {
-        String average = "" + game.getAverage() + "ms";
+        String average = game.getAverage() + "ms";
         averageText.setText(average);
+    }
+
+    // Android 15+ draws edge-to-edge; Android 16 no longer allows opting out.
+    private void applySystemBarInsets(View view) {
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
+            Insets bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            return windowInsets;
+        });
     }
 
     private void setAllRows(TrialTableRow.ColorPalette colorPalette) {

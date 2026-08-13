@@ -1,4 +1,6 @@
 /.idea/modules
+/.idea/modules.xml
+*.iml
 /.idea/libraries
 /.idea/workspace.xml
 /.idea/deploymentTargetDropDown.xml
